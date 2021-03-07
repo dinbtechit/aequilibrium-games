@@ -31,9 +31,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/@popperjs/core/dist/umd/popper.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -127,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "aequilibrium-games"
+  "defaultProject": "aequilibrium-games",
+  "cli": {
+    "analytics": "ddd3af7d-acf2-4a73-bdfc-f0c95f1c2e49"
+  }
 }
