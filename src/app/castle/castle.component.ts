@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSliderChange } from '@angular/material/slider';
-import { CastleService } from './services/castle.service';
+import {Component, OnInit} from '@angular/core';
+import {MatSliderChange} from '@angular/material/slider';
+import {CastleService} from './services/castle.service';
 
 @Component({
   selector: 'app-castle',
@@ -23,15 +23,13 @@ export class CastleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.grid = [4, , , , , , , , , , , , , , , , , , ];
+
   }
 
   onCanvasSize(event: MatSliderChange): void {
-    setTimeout(() => {
-      this.canvasSize = event.value === null ? 0 : event.value;
-      this.grid = Array(this.canvasSize).fill(null);
-      this.countCastles();
-    }, 0);
+    this.canvasSize = event.value === null ? 0 : event.value;
+    this.grid = Array(this.canvasSize).fill(null);
+    this.countCastles();
   }
 
   mousedown(b: any): void {
@@ -54,9 +52,6 @@ export class CastleComponent implements OnInit {
     this.countCastles();
   }
 
-  countCastles(): void {
-    this.numberOfCastles = this.castleService.countCastles(this.grid);
-  }
 
   rotatePlaneRight(): void {
     if (this.planeRotateDegree !== 360) {
@@ -70,8 +65,12 @@ export class CastleComponent implements OnInit {
     }
   }
 
+  countCastles(): void {
+    const landscape = this.grid.map((x, i) => (x === null ? -200000000 : x));
+    this.numberOfCastles = this.castleService.countCastles(landscape);
+  }
+
   castleBuildableLand(landIndex: number): boolean {
-    /*this.countCastles();*/
     const buildCastle = this.castleService.indexesOfCastle.indexOf(landIndex) > -1;
     return buildCastle;
   }

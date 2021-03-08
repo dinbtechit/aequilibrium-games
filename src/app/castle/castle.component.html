@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<div fxLayout="column" (mouseup)="mouseup()">
   <div fxFlex class="float-start ms-2 mt-5" style="font-size: 75px"> 🏰 {{ numberOfCastles.toString() }}</div>
   <div fxFlex fxLayout="column" fxLayoutAlign="center center">
       <div id="plane" class="disableSelection"
@@ -12,14 +12,13 @@
                (mouseover)="mouseover(idx)"
                (mouseup)="mouseup()"
                class="land"
-               [ngClass]="{'tall': g > 0}"
+               [ngClass]="{'land-elevation': g > 0}"
                [ngStyle]="{'transform': (g > 0)? 'translateZ(' + g +'em) scaleZ('+ g * .25 +')' : ''}">
-                   {{ g }} - {{ idx }}
                    <ng-container *ngIf="castleBuildableLand(idx)">
-                      🚩
+                     <span style="font-size: 35px"> 🏰</span>
                    </ng-container>
-                      <div  [ngClass]="{'cubeFace': g > 0}"></div>
-                      <div [ngClass]="{'cubeFace': g > 0, 'face2': g > 0}"></div>
+                   <div  [ngClass]="{'cubeFace': g > 0}"></div>
+                   <div [ngClass]="{'cubeFace': g > 0, 'face2': g > 0}"></div>
           </div>
         </ng-container>
       </div>

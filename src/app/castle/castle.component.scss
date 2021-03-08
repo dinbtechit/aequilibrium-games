@@ -1,4 +1,4 @@
-#plane .land, .tall:before, .tall:after{
+#plane .land, .land-elevation:before, .land-elevation:after{
   width:4em;
   height:4em;
 }
@@ -22,26 +22,12 @@
   box-shadow:.125em .125em .5em rgba(0,0,0,.09);
 }
 
-.tall{
+.land-elevation {
+  z-index: 1;
   position:relative;
   background: url("/assets/images/land.jpg") center center no-repeat !important;
   transform-style: preserve-3d;
 }
-
-
-
-.disableSelection{
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  outline: 0;
-}
-
-// ----------------------------------------
-
 
 .cubeFace {
   position: absolute;
@@ -74,6 +60,21 @@
 }
 .cubeFace:after {
   top: 0; left: 100%;
-  background: url("/assets/images/ground.jpg") center center no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/images/ground.jpg") center center no-repeat;
   transform: rotateY(90deg);
 }
+
+
+
+
+.disableSelection{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: 0;
+}
+
+// ----------------------------------------
