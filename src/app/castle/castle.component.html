@@ -1,27 +1,27 @@
 <div fxLayout="column" (mouseup)="mouseup()">
   <div fxFlex class="float-start ms-2 mt-5" style="font-size: 75px"> 🏰 {{ numberOfCastles.toString() }}</div>
   <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-      <div id="plane" class="disableSelection"
-           [ngStyle]="{'width.em': 40, 'height.em': 40}"
-           [style.transform]="'rotateX(45deg) rotateZ('+ planeRotateDegree +'deg) translateZ(-1em)'"
-           (mouseup)="mouseup()">
-        <ng-container *ngFor="let g of grid; let idx = index">
-          <div fxLayout="column" fxLayoutAlign="center center"
-               class="text-dark fw-bolder"
-               (mousedown)="mousedown(idx)"
-               (mouseover)="mouseover(idx)"
-               (mouseup)="mouseup()"
-               class="land"
-               [ngClass]="{'land-elevation': g > 0}"
-               [ngStyle]="{'transform': (g > 0)? 'translateZ(' + g +'em) scaleZ('+ g * .25 +')' : ''}">
-                   <ng-container *ngIf="castleBuildableLand(idx)">
-                     <span style="font-size: 35px">🏰</span>
-                   </ng-container>
-                   <div  [ngClass]="{'side-front': g > 0}"></div>
-                   <div [ngClass]="{'side-front': g > 0, 'top-back': g > 0}"></div>
-          </div>
-        </ng-container>
-      </div>
+    <div id="plane" class="disableSelection"
+         [ngStyle]="{'width.em': 40, 'height.em': 40}"
+         [style.transform]="'rotateX(45deg) rotateZ('+ planeRotateDegree +'deg) translateZ(-1em)'"
+         (mouseup)="mouseup()">
+      <ng-container *ngFor="let g of grid; let idx = index">
+        <div fxLayout="column" fxLayoutAlign="center center"
+             class="text-dark fw-bolder"
+             (mousedown)="mousedown(idx)"
+             (mouseover)="mouseover(idx)"
+             (mouseup)="mouseup()"
+             class="land"
+             [ngClass]="{'land-elevation': g > 0}"
+             [ngStyle]="{'transform': (g > 0)? 'translateZ(' + g +'em) scaleZ('+ g * .25 +')' : ''}">
+          <ng-container *ngIf="castleBuildableLand(idx)">
+            <span style="font-size: 35px">🏰</span>
+          </ng-container>
+          <div [ngClass]="{'side-front': g > 0}"></div>
+          <div [ngClass]="{'side-front': g > 0, 'top-back': g > 0}"></div>
+        </div>
+      </ng-container>
+    </div>
 
     <div fxFlex fxLayout="row" fxLayoutAlign="center center">
       <button mat-mini-fab (click)="rotatePlaneRight()"><i class="fas fa-backward"></i></button>
