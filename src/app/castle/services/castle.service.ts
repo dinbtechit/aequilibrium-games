@@ -55,11 +55,11 @@ export class CastleService {
         }
       }
     }
-    const lastCastleBuildIn = this.indexesOfCastle.indexOf( this.indexesOfCastle.length - 1);
-    if (lastCastleBuildIn < landscape.length - 1 ) {
+    const lastCastleBuildIn = this.indexesOfCastle.indexOf(this.indexesOfCastle.length - 1);
+    if (lastCastleBuildIn < landscape.length - 1) {
       this.indexesOfCastle.push(landscape.length - 1);
     }
-    console.log(this.indexesOfCastle);
+    /*console.log(this.indexesOfCastle);*/
     return count;
   }
 
