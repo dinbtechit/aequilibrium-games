@@ -23,7 +23,7 @@ export class CastleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.grid = [null, , 2, , , , , , , , , , , , , , , , ];
+    this.grid = [4, , , , , , , , , , , , , , , , , , ];
   }
 
   onCanvasSize(event: MatSliderChange): void {

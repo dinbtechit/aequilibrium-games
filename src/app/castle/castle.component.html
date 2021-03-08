@@ -1,7 +1,7 @@
 <div fxLayout="column">
   <div fxFlex class="float-start ms-2 mt-5" style="font-size: 75px"> 🏰 {{ numberOfCastles.toString() }}</div>
   <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-      <div id="plane"
+      <div id="plane" class="disableSelection"
            [ngStyle]="{'width.em': 40, 'height.em': 40}"
            [style.transform]="'rotateX(45deg) rotateZ('+ planeRotateDegree +'deg) translateZ(-1em)'"
            (mouseup)="mouseup()">
@@ -11,28 +11,18 @@
                (mousedown)="mousedown(idx)"
                (mouseover)="mouseover(idx)"
                (mouseup)="mouseup()"
+               class="land"
                [ngClass]="{'tall': g > 0}"
                [ngStyle]="{'transform': (g > 0)? 'translateZ(' + g +'em) scaleZ('+ g * .25 +')' : ''}">
-            <div class="back"></div>
-            <div class="back-side"></div>
-            {{ g }} - {{ idx }}
-            <ng-container *ngIf="castleBuildableLand(idx)">
-              🚩
-            </ng-container>
+                   {{ g }} - {{ idx }}
+                   <ng-container *ngIf="castleBuildableLand(idx)">
+                      🚩
+                   </ng-container>
+                      <div  [ngClass]="{'cubeFace': g > 0}"></div>
+                      <div [ngClass]="{'cubeFace': g > 0, 'face2': g > 0}"></div>
           </div>
         </ng-container>
-
-          <div class="numpad">
-            <div class="front6 square"> <span style="font-size: 2em">🏰</span></div>
-            <div class="back6 square"></div>
-            <div class="top6 square"></div>
-            <div class="left6 square"></div>
-            <div class="right6 square"></div>
-            <div class="bottom6 square"></div>
-          </div>
-
       </div>
-
 
     <div fxFlex fxLayout="row" fxLayoutAlign="center center">
       <button mat-mini-fab (click)="rotatePlaneRight()"><i class="fas fa-backward"></i></button>
