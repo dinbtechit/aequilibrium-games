@@ -15,10 +15,10 @@
                [ngClass]="{'land-elevation': g > 0}"
                [ngStyle]="{'transform': (g > 0)? 'translateZ(' + g +'em) scaleZ('+ g * .25 +')' : ''}">
                    <ng-container *ngIf="castleBuildableLand(idx)">
-                     <span style="font-size: 35px"> 🏰</span>
+                     <span style="font-size: 35px">🏰</span>
                    </ng-container>
-                   <div  [ngClass]="{'cubeFace': g > 0}"></div>
-                   <div [ngClass]="{'cubeFace': g > 0, 'face2': g > 0}"></div>
+                   <div  [ngClass]="{'side-front': g > 0}"></div>
+                   <div [ngClass]="{'side-front': g > 0, 'top-back': g > 0}"></div>
           </div>
         </ng-container>
       </div>
@@ -46,7 +46,8 @@
         <div class="ps-1 pe-1 pt-2">
           <mat-form-field appearance="outline" class="h-100 w-100 bg-dark text-white-50">
             <textarea matInput
-                      [value]="grid.toString()"
+                      [(ngModel)]="numberInput"
+                      (keyup)="numericInput()"
                       class="h-100">
             </textarea>
           </mat-form-field>

@@ -10,6 +10,7 @@ import {CastleService} from './services/castle.service';
 export class CastleComponent implements OnInit {
   canvasSize: any;
   grid: any[];
+  numberInput: string;
   terrainElevation: any;
   clickAndDrag = false;
   numberOfCastles: number;
@@ -20,6 +21,7 @@ export class CastleComponent implements OnInit {
     this.terrainElevation = 0;
     this.grid = [];
     this.numberOfCastles = 0;
+    this.numberInput = '';
   }
 
   ngOnInit(): void {
@@ -66,6 +68,7 @@ export class CastleComponent implements OnInit {
   }
 
   countCastles(): void {
+    this.numberInput = this.grid.toString();
     const landscape = this.grid.map((x, i) => (x === null ? -200000000 : x));
     this.numberOfCastles = this.castleService.countCastles(landscape);
   }
@@ -73,5 +76,16 @@ export class CastleComponent implements OnInit {
   castleBuildableLand(landIndex: number): boolean {
     const buildCastle = this.castleService.indexesOfCastle.indexOf(landIndex) > -1;
     return buildCastle;
+  }
+
+  numericInput(): void {
+    setTimeout(() => {
+      if (this.numberInput.trim() === '') {
+        this.grid = [];
+      } else {
+        this.grid = this.numberInput.split(',');
+      }
+      this.countCastles();
+    }, 140);
   }
 }
