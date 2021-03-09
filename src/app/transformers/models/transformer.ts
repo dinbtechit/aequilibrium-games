@@ -1,4 +1,3 @@
-
 export enum ITeam {
   Autobot = 'A',
   Deception = 'D'
@@ -16,9 +15,13 @@ export interface ITransformer {
   firepower: number;
   skill: number;
   overallRating: number;
+  battleResults?: IBattleResults;
 }
 
-export interface ITransformerTeam {
-  name: string;
-  transformer: ITransformer;
+export enum IBattleResults {
+  Autobots = 'autobots',
+  Decepticons = 'decepticons',
+  AllDestroyed = 'allDestroyed',
+  Tie = 'tie',
+  Survivor = 'survivor'
 }

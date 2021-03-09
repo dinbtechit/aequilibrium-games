@@ -154,7 +154,7 @@
             <mat-list-item role="listitem" class="text-white-50 pb-2" style="height: auto">
               <mat-card class="pb-2 w-100" style="height: 100px">
                 <mat-card-header>
-                  <img mat-card-avatar [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ item.key +'.jpg'"
+                  <img mat-card-avatar [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ item.key.replace(' ', '_') +'.jpg'"
                        class="mat-elevation-z3"
                        style="transform: scale(1.2)"/>
                   <mat-card-title>{{item.key}}</mat-card-title>
