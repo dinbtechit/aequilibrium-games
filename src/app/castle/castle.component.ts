@@ -14,7 +14,7 @@ export class CastleComponent implements OnInit {
   terrainElevation: any;
   clickAndDrag = false;
   numberOfCastles: number;
-  planeRotateDegree = 45;
+  planeRotateDegree = 25;
 
   constructor(private castleService: CastleService) {
     this.canvasSize = 0;
@@ -69,12 +69,17 @@ export class CastleComponent implements OnInit {
 
   countCastles(): void {
     this.numberInput = this.grid.toString();
-    const landscape = this.grid.map((x, i) => (x === null ? -200000000 : x));
+    const landscape = this.grid.map(x => x === '' ? -20000 : x)
+      .map((x, i) => (x === null ? -20000 : +x));
     this.numberOfCastles = this.castleService.countCastles(landscape);
   }
 
   castleBuildableLand(landIndex: number): boolean {
-    const buildCastle = this.castleService.indexesOfCastle.indexOf(landIndex) > -1;
+    const valueAt = this.castleService.indexesOfCastle[landIndex];
+    let buildCastle = false;
+    if (valueAt === '*' || valueAt === 'p' || valueAt === 'v') {
+      buildCastle = true;
+    }
     return buildCastle;
   }
 
@@ -84,6 +89,7 @@ export class CastleComponent implements OnInit {
         this.grid = [];
       } else {
         this.grid = this.numberInput.split(',');
+        console.log(this.grid);
       }
       this.countCastles();
     }, 140);

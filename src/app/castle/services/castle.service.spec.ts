@@ -27,7 +27,27 @@ describe('CastleService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should build only 1 castle when everything is same landscape (i.e., All Peeks or All Valley)', () => {
+  it('1.You can always build a castle at the start of the array, provided it is non-empty', () => {
+    const landscape: any = [
+      [null, 4, 2],
+    ];
+    for (const land of landscape) {
+      const numberOfCastles = service.countCastles(land);
+      expect(numberOfCastles).toEqual(3);
+    }
+  });
+
+  it('2.You can always build a castle at the end of the array, provided it is non-empty', () => {
+    const landscape: any = [
+      [2, 4, null],
+    ];
+    for (const land of landscape) {
+      const numberOfCastles = service.countCastles(land);
+      expect(numberOfCastles).toEqual(3);
+    }
+  });
+
+  it('3.should build only 1 castle when everything is same landscape (i.e., All Peeks or All Valley)', () => {
     const landscape = [
       [1, 1, 1, 1],
       [2, 2, 2, 2],
@@ -37,6 +57,16 @@ describe('CastleService', () => {
     for (const land of landscape) {
       const numberOfCastles = service.countCastles(land);
       expect(numberOfCastles).toEqual(1);
+    }
+  });
+
+  it('4.should build only 1 castle per peek or valley', () => {
+    const landscape = [
+      [1, 4, 3, 6, 2],
+    ];
+    for (const land of landscape) {
+      const numberOfCastles = service.countCastles(land);
+      expect(numberOfCastles).toEqual(5);
     }
   });
 
@@ -54,10 +84,14 @@ describe('CastleService', () => {
   it('should be able to build only 3 castles when each integer is different', () => {
     const landscape = [
       [1, 4, 2],
+      [6, 2, 4],
     ];
     for (const land of landscape) {
       const numberOfCastles = service.countCastles(land);
       expect(numberOfCastles).toEqual(3);
     }
   });
+
+
+
 });

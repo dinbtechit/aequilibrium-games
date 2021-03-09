@@ -9,6 +9,7 @@ import { TransformersComponent } from './transformers/transformers.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './shared/modules/material.module';
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {FormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
