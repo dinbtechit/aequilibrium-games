@@ -10,12 +10,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './shared/modules/material.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { TransformerStatsComponent } from './transformers/components/transformer-stats/transformer-stats.component';
+import { TransformerTeamsComponent } from './transformers/components/transformer-teams/transformer-teams.component';
+import { TransformerOpponentComponent } from './transformers/components/transformer-opponent/transformer-opponent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CastleComponent,
-    TransformersComponent
+    TransformersComponent,
+    TransformerStatsComponent,
+    TransformerTeamsComponent,
+    TransformerOpponentComponent
   ],
   imports: [
     BrowserModule,

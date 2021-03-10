@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ITeam, ITransformer} from '../models/transformer';
 import * as util from '../../shared/utils/validation-utils';
-import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class TransformersService {
   }
 
   public sortTransformers(team: Map<string, ITransformer>): Map<string, ITransformer> {
-    team[Symbol.iterator] = function*() {
+    team[Symbol.iterator] = function* () {
       yield* [...this.entries()].sort((a, b) => b[1].rank - a[1].rank);
     };
     /*console.log(new Map([...team]));*/
@@ -27,7 +26,7 @@ export class TransformersService {
   }
 
   public async getAllTransformers(): Promise<void> {
-    const transformers = await this.http.get<any[]>('/assets/data/transformers.json').toPromise().then(
+    await this.http.get<any[]>('/assets/data/transformers.json').toPromise().then(
       (resolve) => {
         for (const t of resolve) {
           const [name, team, strength, intelligence, speed, endurance, rank, courage, firepower, skill] = t;
@@ -113,5 +112,21 @@ export class TransformersService {
       return false;
     }
     return true;
+  }
+
+  initilizer(): ITransformer {
+    return {
+      name: '',
+      team: ITeam.Autobot,
+      strength: 0,
+      intelligence: 0,
+      speed: 0,
+      endurance: 0,
+      rank: 0,
+      courage: 0,
+      firepower: 0,
+      skill: 0,
+      overallRating: 0,
+    };
   }
 }

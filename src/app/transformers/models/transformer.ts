@@ -15,7 +15,14 @@ export interface ITransformer {
   firepower: number;
   skill: number;
   overallRating: number;
-  battleResults?: IBattleResults;
+  battleResults?: IIndividualBattleResults;
+}
+
+export enum IIndividualBattleResults {
+  Winner = 'winner',
+  Loser = 'loser',
+  Tie = 'tie',
+  Survivor = 'survivor'
 }
 
 export enum IBattleResults {
@@ -23,5 +30,10 @@ export enum IBattleResults {
   Decepticons = 'decepticons',
   AllDestroyed = 'allDestroyed',
   Tie = 'tie',
-  Survivor = 'survivor'
+}
+
+export interface IBattleStats {
+  numberOfBattles?: number;
+  battleResults?: IBattleResults;
+  survivorsOfLosingTeam?: Map<string, ITransformer>;
 }

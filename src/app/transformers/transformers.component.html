@@ -1,171 +1,56 @@
 <div fxLayout="column" class="bg-dark text-white-50">
   <div class="m-2">
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1px" class="mt-5">
-      <div fxFlex fxLayout="column"  fxLayoutAlign="start end">
-        <label>Strength</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">8
-          </div>
-        </div>
-        <label class="mt-2">Intelligence</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
-        <label class="mt-2">Speed</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
-        <label class="mt-2">Endurance</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
-        <label class="mt-2">Rank</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
-        <label class="mt-2">courage</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
-        <label class="mt-2">Firepower</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
-        <label class="mt-2">Skill</label>
-        <div class="progress" style="width: 250px">
-          <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">2
-          </div>
-        </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="start end">
+        <app-transformer-stats [transformer]="currentAutobot"></app-transformer-stats>
       </div>
       <div fxFlex fxLayoutAlign="center center">
-        <mat-card style="width: 250px">
-          <mat-card-header>
-            <img mat-card-avatar
-                 src="/assets/images/Autobot.gif"
-                 class="mat-elevation-z3"/>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          </mat-card-header>
-          <div fxLayoutAlign="center start">
-            <img mat-card-image src="https://www.ntfa.net/ntfa/techspecs/g1specs/Bluestreak.jpg"
-                 class="mt-2"
-                 style="max-height: 170px;max-width: 150px"
-                 alt="Photo">
-          </div>
-          <mat-card-content>
-            <p>Rank</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
+        <app-transformer-opponent [transformerTeam]="'Autobot'" [transformer]="currentAutobot"></app-transformer-opponent>
       </div>
-      <div fxFlex="5" fxLayoutAlign="center center"><span style="font-size: 5rem">vs</span></div>
+      <div fxFlex="5" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="40%">
+        <span fxFlex style="font-size: 5rem">vs</span>
+      </div>
       <div fxFlex fxLayoutAlign="center center">
-        <mat-card style="width: 250px">
-          <mat-card-header>
-            <img mat-card-avatar
-                 src="/assets/images/Decepticon.gif"
-                 class="mat-elevation-z3"/>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          </mat-card-header>
-          <div fxLayoutAlign="center start">
-            <img mat-card-image src="https://www.ntfa.net/ntfa/techspecs/g1specs/Soundwave.jpg"
-                 class="mt-2"
-                 style="max-height: 170px;max-width: 150px"
-                 alt="Photo">
-          </div>
-          <mat-card-content>
-            <p>
-              Rank
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
+        <app-transformer-opponent [transformerTeam]="'Decepticon'" [transformer]="currentDecepticons"></app-transformer-opponent>
       </div>
       <div fxFlex fxLayoutAlign="start start">
-        <div class="progress" style="width: 300px">
-          <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
-               aria-valuemax="100">25%
-          </div>
-        </div>
+        <app-transformer-stats [transformer]="currentDecepticons"></app-transformer-stats>
       </div>
     </div>
     <br><br>
     <hr>
     <div fxLayout="row" class="mt-5" fxLayoutAlign="center center">
-      <div fxFlex="40" fxLayoutAlign="center center">
+      <div fxFlex="30" fxLayoutAlign="center center">
         <img mat-card-avatar
+             alt="logo"
              src="/assets/images/Autobot.gif"
              class="mat-elevation-z3 me-3"
              style="transform: scale(1.2)"/>
         <span style="font-size: 2.5em">Autobots</span>
       </div>
-      <div fxFlex="40" fxLayoutAlign="center center">
+      <div>
+        <button mat-flat-button
+                (click)="beginBattle()"
+                color="primary">Begin Battle
+        </button>
+      </div>
+      <div fxFlex="30" fxLayoutAlign="center center">
         <img mat-card-avatar
+             alt="logo"
              src="/assets/images/Decepticon.gif"
              class="mat-elevation-z3 me-3"
              style="transform: scale(1.2)"/>
         <span style="font-size: 2.5em">Decepticons</span>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center start" class="mt-5">
-      <div fxFlex="40">
-        <mat-list role="list" class="w-100">
-          <ng-container *ngFor="let item  of autobots | keyvalue: originalOrder ">
-            <mat-list-item role="listitem" class="text-white-50 pb-2" style="height: auto">
-              <mat-card class="pb-2 w-100" style="height: 100px">
-                <mat-card-header>
-                  <img mat-card-avatar
-                       alt="photo"
-                       [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ item.key.replace(' ', '_') +'.jpg'"
-                       class="mat-elevation-z3"
-                       style="transform: scale(1.2)"/>
-                  <mat-card-title>{{item.key}}</mat-card-title>
-                  <mat-card-subtitle>Rank - {{item.value.rank}}</mat-card-subtitle>
-                </mat-card-header>
-              </mat-card>
-            </mat-list-item>
-          </ng-container>
-        </mat-list>
+      <div fxLayout="row" fxLayoutAlign="center start" class="mt-5">
+        <div fxFlex="40">
+          <app-transformer-teams  [transformerTeam]="'autobot'"  [transformers]="autobots"></app-transformer-teams>
+        </div>
+        <div fxFlex="40">
+          <app-transformer-teams  [transformerTeam]="'decepticon'"  [transformers]="decepticons"></app-transformer-teams>
+        </div>
       </div>
-      <div fxFlex="40">
-        <mat-list role="list" class="w-100">
-          <ng-container *ngFor="let item  of deceptions | keyvalue: originalOrder">
-            <mat-list-item role="listitem" class="text-white-50 pb-2" style="height: auto">
-              <mat-card class="pb-2 w-100" style="height: 100px">
-                <mat-card-header>
-                  <img mat-card-avatar [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ item.key.replace(' ', '_') +'.jpg'"
-                       class="mat-elevation-z3"
-                       style="transform: scale(1.2)"/>
-                  <mat-card-title>{{item.key}}</mat-card-title>
-                  <mat-card-subtitle>Rank - {{item.value.rank}}</mat-card-subtitle>
-                </mat-card-header>
-              </mat-card>
-            </mat-list-item>
-          </ng-container>
-        </mat-list>
-      </div>
-    </div>
   </div>
 </div>
 

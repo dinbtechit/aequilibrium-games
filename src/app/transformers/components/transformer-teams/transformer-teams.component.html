@@ -1,0 +1,35 @@
+<mat-list role="list" class="w-100">
+  <ng-container *ngFor="let item of transformers | keyvalue: originalOrder">
+    <mat-list-item role="listitem" class="text-white-50 pb-2"
+                   style="height: auto">
+      <mat-card class="pb-2 w-100"
+                [style.opacity]="item.value.battleResults ===  IIndividualBattleResults.Loser? 0.1 : 1"
+                style="height: 100px">
+        <mat-card-header>
+          <img mat-card-avatar
+               alt="image"
+               [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ item.key.replace(' ', '_') +'.jpg'"
+               (error)="onImgError($event)"
+               class="mat-elevation-z3"
+               style="transform: scale(1.2)"/>
+          <mat-card-title>{{item.key}}</mat-card-title>
+          <mat-card-subtitle>Rank - {{item.value.rank}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            <strong style="color: green" *ngIf="item.value.battleResults === IIndividualBattleResults.Winner" >
+              🏆 {{item.value.battleResults | uppercase }}
+            </strong>
+            <strong style="color: red" *ngIf="item.value.battleResults ===  IIndividualBattleResults.Loser" >
+              👎 {{item.value.battleResults | uppercase }}
+            </strong>
+            <strong *ngIf="item.value.battleResults === IIndividualBattleResults.Tie" >
+              🏴 {{item.value.battleResults | uppercase }}
+            </strong>
+            <strong *ngIf="item.value.battleResults === IIndividualBattleResults.Survivor" >
+              🍹 {{item.value.battleResults | uppercase }}
+            </strong>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </mat-list-item>
+  </ng-container>
+</mat-list>
