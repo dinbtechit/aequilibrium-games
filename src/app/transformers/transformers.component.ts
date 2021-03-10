@@ -5,11 +5,23 @@ import {BattleService} from './services/battle.service';
 import {Subscription} from 'rxjs';
 import {BattleResultComponent} from './components/battle-result/battle-result.component';
 import {MatDialog} from '@angular/material/dialog';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-transformers',
   templateUrl: './transformers.component.html',
-  styleUrls: ['./transformers.component.scss']
+  styleUrls: ['./transformers.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateY(-100%)'}),
+        animate('200ms ease-in', style({transform: 'translateY(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
+      ])
+    ])
+  ]
 })
 export class TransformersComponent implements OnInit, OnDestroy {
 
@@ -25,6 +37,7 @@ export class TransformersComponent implements OnInit, OnDestroy {
   decepticonsTeam = ITeam.Deception;
 
   battleStats: IBattleStats;
+  visible = false;
 
   constructor(private transformersService: TransformersService,
               private battleService: BattleService,
@@ -54,6 +67,8 @@ export class TransformersComponent implements OnInit, OnDestroy {
 
 
   async beginBattle(): Promise<void> {
+    this.visible = false;
+    await this.ngOnInit();
     // 1. Count the possible battle by team size(s)
     const numberOfPossibleBattles = this.battleService.numberOfPossibleBattles({
       autobots: this.autobots, decepticon: this.decepticons
@@ -73,7 +88,8 @@ export class TransformersComponent implements OnInit, OnDestroy {
         const autobot: ITransformer = autobotsBattleQ.shift();
         const decepticon: ITransformer = decepticonsBattleQ.shift();
         this.battleService.setOpponents({autobot, decepticon});
-        await this.delay(1000);
+        this.visible = true;
+        await this.delay(5000);
         const battleResult: IBattleResults = this.battleService.battle(
           {key: autobot.name, value: autobot},
           {key: decepticon.name, value: decepticon});
@@ -105,7 +121,9 @@ export class TransformersComponent implements OnInit, OnDestroy {
           decepticons: this.decepticons
         });
       }
+      this.visible = false;
       this.displayBattleStatsDialog(this.battleStats);
+
 
     } else {
       console.error('Oops..BattleQ size is not equal.');
@@ -224,7 +242,7 @@ export class TransformersComponent implements OnInit, OnDestroy {
 
   displayBattleStatsDialog(data: IBattleStats): void {
     this.dialog.open(BattleResultComponent, {
-      width: '75%',
+      width: '60%',
       data
     });
   }

@@ -1,14 +1,16 @@
 <div fxLayout="column" class="bg-dark text-white-50">
   <div class="m-2">
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1px" class="mt-5">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1px" class="mt-5" *ngIf="visible" [@slideInOut]>
       <div fxFlex fxLayout="column" fxLayoutAlign="start end">
         <app-transformer-stats [transformer]="currentAutobot"></app-transformer-stats>
       </div>
       <div fxFlex fxLayoutAlign="center center">
         <app-transformer-opponent [transformerTeam]="'Autobot'" [transformer]="currentAutobot"></app-transformer-opponent>
       </div>
-      <div fxFlex="5" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="40%">
-        <span fxFlex style="font-size: 5rem">vs</span>
+      <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="40%">
+          <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+          <span style="font-size: 3rem">vs</span>
+          <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
       </div>
       <div fxFlex fxLayoutAlign="center center">
         <app-transformer-opponent [transformerTeam]="'Decepticon'" [transformer]="currentDecepticons"></app-transformer-opponent>
@@ -29,7 +31,7 @@
         <span style="font-size: 2.5em">Autobots</span>
       </div>
       <div>
-        <button mat-flat-button
+        <button mat-flat-button *ngIf="!visible"
                 (click)="beginBattle()"
                 color="primary">Begin Battle
         </button>

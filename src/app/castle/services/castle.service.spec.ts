@@ -1,22 +1,9 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { CastleService } from './castle.service';
+import {CastleService} from './castle.service';
 
-describe('CastleService', () => {
+fdescribe('CastleService', () => {
   let service: CastleService;
-
-  const peeksNValleys = [
-    [2, 6, 4],
-    [1, 2, 6, 4, 1],
-    [2, 6, 6, 6, 3],
-    [2, 6, 6, 6, 6, 6, 3],
-    [2, 4, 4, 4, 3],
-    [1, 4, 4, 4, 2],
-    [6, 1, 4],
-    [6, 1, 1, 1, 6],
-    [2, 1, 1, 1, 2],
-    [3, 1, 1, 1, 4],
-  ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -29,21 +16,21 @@ describe('CastleService', () => {
 
   it('1.You can always build a castle at the start of the array, provided it is non-empty', () => {
     const landscape: any = [
-      [null, 4, 2],
+      [ , 4, 2],
     ];
     for (const land of landscape) {
       const numberOfCastles = service.countCastles(land);
-      expect(numberOfCastles).toEqual(3);
+      expect(numberOfCastles).toEqual(2);
     }
   });
 
   it('2.You can always build a castle at the end of the array, provided it is non-empty', () => {
     const landscape: any = [
-      [2, 4, null],
+      [2, 4, ],
     ];
     for (const land of landscape) {
       const numberOfCastles = service.countCastles(land);
-      expect(numberOfCastles).toEqual(3);
+      expect(numberOfCastles).toEqual(2);
     }
   });
 
@@ -56,7 +43,7 @@ describe('CastleService', () => {
     ];
     for (const land of landscape) {
       const numberOfCastles = service.countCastles(land);
-      expect(numberOfCastles).toEqual(1);
+      expect(numberOfCastles).toEqual(2);
     }
   });
 
@@ -91,7 +78,4 @@ describe('CastleService', () => {
       expect(numberOfCastles).toEqual(3);
     }
   });
-
-
-
 });
