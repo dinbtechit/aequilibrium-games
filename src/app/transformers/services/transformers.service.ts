@@ -114,7 +114,7 @@ export class TransformersService {
     return true;
   }
 
-  initilizer(): ITransformer {
+  initializer(): ITransformer {
     return {
       name: '',
       team: ITeam.Autobot,

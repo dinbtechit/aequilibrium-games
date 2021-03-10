@@ -16,7 +16,7 @@ export class TransformerOpponentComponent implements OnInit {
 
 
   constructor(private transformersService: TransformersService) {
-    this.transformer = this.transformersService.initilizer();
+    this.transformer = this.transformersService.initializer();
   }
 
   ngOnInit(): void {

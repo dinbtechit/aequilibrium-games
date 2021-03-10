@@ -3,6 +3,8 @@ import {TransformersService} from './services/transformers.service';
 import {IBattleResults, IBattleStats, IIndividualBattleResults, ITeam, ITransformer} from './models/transformer';
 import {BattleService} from './services/battle.service';
 import {Subscription} from 'rxjs';
+import {BattleResultComponent} from './components/battle-result/battle-result.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-transformers',
@@ -22,12 +24,14 @@ export class TransformersComponent implements OnInit, OnDestroy {
   autobotTeam = ITeam.Autobot;
   decepticonsTeam = ITeam.Deception;
 
-  battleStats: IBattleStats = {};
+  battleStats: IBattleStats;
 
   constructor(private transformersService: TransformersService,
-              private battleService: BattleService) {
-    this.currentAutobot = this.transformersService.initilizer();
-    this.currentDecepticons = this.transformersService.initilizer();
+              private battleService: BattleService,
+              private dialog: MatDialog) {
+    this.currentAutobot = this.transformersService.initializer();
+    this.currentDecepticons = this.transformersService.initializer();
+    this.battleStats = this.battleService.battleStatsInitializer();
 
     this.subscriptionsA = this.battleService.getOpponents().autobot.subscribe((autobot) => {
       this.currentAutobot = autobot;
@@ -106,6 +110,8 @@ export class TransformersComponent implements OnInit, OnDestroy {
           decepticons: this.decepticons
         });
 
+        this.displayBattleStatsDialog(this.battleStats);
+
         console.log(this.battleStats);
       }
 
@@ -159,6 +165,8 @@ export class TransformersComponent implements OnInit, OnDestroy {
       this.battleStats = {
         numberOfBattles,
         battleResults: IBattleResults.AllDestroyed,
+        winningTeam: new Map<string, ITransformer>(),
+        losingTeam: new Map<string, ITransformer>()
       };
       return;
     }
@@ -177,6 +185,8 @@ export class TransformersComponent implements OnInit, OnDestroy {
       this.battleStats = {
         numberOfBattles,
         battleResults: IBattleResults.Autobots,
+        winningTeam: autobots,
+        losingTeam: decepticons
       };
       this.markSurvivors({losingTeam: decepticons});
 
@@ -184,12 +194,16 @@ export class TransformersComponent implements OnInit, OnDestroy {
       this.battleStats = {
         numberOfBattles,
         battleResults: IBattleResults.Decepticons,
+        winningTeam: decepticons,
+        losingTeam: autobots
       };
       this.markSurvivors({losingTeam: autobots});
     } else if (numberWinnersInAutobot === numberWinnersInDecepticon) {
       this.battleStats = {
         numberOfBattles,
         battleResults: IBattleResults.Tie,
+        winningTeam: new Map<string, ITransformer>(),
+        losingTeam: new Map<string, ITransformer>()
       };
     } else {
       console.error('Unable to determine winner/survivors');
@@ -216,6 +230,13 @@ export class TransformersComponent implements OnInit, OnDestroy {
         v.battleResults = IIndividualBattleResults.Survivor;
       }
     }
+  }
+
+  displayBattleStatsDialog(data: IBattleStats): void {
+    this.dialog.open(BattleResultComponent, {
+      width: '75%',
+      data
+    });
   }
 
 

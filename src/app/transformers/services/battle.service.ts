@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IBattleResults, ITransformer} from '../models/transformer';
+import {IBattleResults, IBattleStats, ITransformer} from '../models/transformer';
 import {Observable, Subject} from 'rxjs';
 
 @Injectable({
@@ -93,5 +93,14 @@ export class BattleService {
     } else {
       return decepticon.size;
     }
+  }
+
+  battleStatsInitializer(): IBattleStats {
+    return {
+      numberOfBattles: 0,
+      battleResults: IBattleResults.BattleInit,
+      winningTeam: new Map<string, ITransformer>(),
+      losingTeam: new Map<string, ITransformer>(),
+    };
   }
 }

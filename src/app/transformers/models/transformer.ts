@@ -1,6 +1,6 @@
 export enum ITeam {
-  Autobot = 'A',
-  Deception = 'D'
+  Autobot = 'autobot',
+  Deception = 'decepticon'
 }
 
 export interface ITransformer {
@@ -30,10 +30,12 @@ export enum IBattleResults {
   Decepticons = 'decepticons',
   AllDestroyed = 'allDestroyed',
   Tie = 'tie',
+  BattleInit = 'battleInit'
 }
 
 export interface IBattleStats {
-  numberOfBattles?: number;
-  battleResults?: IBattleResults;
-  survivorsOfLosingTeam?: Map<string, ITransformer>;
+  numberOfBattles: number;
+  battleResults: IBattleResults;
+  winningTeam: Map<string, ITransformer>;
+  losingTeam: Map<string, ITransformer>;
 }

@@ -1,0 +1,146 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title class="fw-bolder text-white" style="font-size: 3rem;">Battle Ended</h1>
+</div>
+<div mat-dialog-content class="mt-5 text-white">
+  <div fxLayout="column" fxLayoutGap="40px">
+    <div fxFlex fxLayout="column" fxLayoutAlign="start start">
+      <mat-card class="w-100">
+        <mat-card-content fxLayout="row">
+          <div fxFlex fxLayoutAlign="start start">
+          <h1 mat-dialog-title class="fw-bolder ms-2">
+            Number Of Battles
+          </h1>
+          </div>
+          <div fxFlex fxLayoutAlign="end end">
+            <h1 mat-dialog-title class="fw-bolder me-3" style="font-size: 3em">
+              {{data.numberOfBattles}}
+            </h1>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <hr class="w-100" style="color: white">
+    </div>
+
+    <div fxFlex>
+      <h1 mat-dialog-title class="fw-bolder">
+        🏆 Winning team: {{data.battleResults | titlecase}}
+      </h1>
+      <table mat-table [dataSource]="winnerDatasource" class="mat-elevation-z8 w-100">
+        <!-- Name Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <img mat-card-avatar
+                 alt="image"
+                 [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ element.name.replace(' ', '_') +'.jpg'"
+                 (error)="onImgError($event, element.team)"
+                 class="mat-elevation-z3"/>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Team Column -->
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef> Team</th>
+          <td mat-cell *matCellDef="let element"> {{element.team}} </td>
+        </ng-container>
+
+        <!-- Rank Column -->
+        <ng-container matColumnDef="rank">
+          <th mat-header-cell *matHeaderCellDef> Rank</th>
+          <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+        </ng-container>
+
+        <!-- Battle Result Column -->
+        <ng-container matColumnDef="battleResults">
+          <th mat-header-cell *matHeaderCellDef> Individual Battle Results</th>
+          <td mat-cell *matCellDef="let element">
+            <strong style="color: green" *ngIf="element.battleResults === IIndividualBattleResults.Winner">
+              🏆 {{element.battleResults | uppercase }}
+            </strong>
+            <strong style="color: red" *ngIf="element.battleResults ===  IIndividualBattleResults.Loser">
+              👎 {{element.battleResults | uppercase }}
+            </strong>
+            <strong *ngIf="element.battleResults === IIndividualBattleResults.Tie">
+              🏴 {{element.battleResults | uppercase }}
+            </strong>
+            <strong *ngIf="element.battleResults === IIndividualBattleResults.Survivor">
+              🏅 {{element.battleResults | uppercase }}
+            </strong>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <div fxFlex>
+      <h1 mat-dialog-title class="fw-bolder">
+        🏅Losing Team Survivors: {{data.battleResults === 'autobots' ? 'decepticons' : 'autobots' | titlecase}}
+      </h1>
+      <table mat-table [dataSource]="losingTeamSurvivorsDatasource" class="mat-elevation-z8 w-100">
+        <!-- Name Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <img mat-card-avatar
+                 alt="image"
+                 [src]="'https://www.ntfa.net/ntfa/techspecs/g1specs/'+ element.name.replace(' ', '_') +'.jpg'"
+                 (error)="onImgError($event, element.team)"
+                 class="mat-elevation-z3"/>
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Team Column -->
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef> Team</th>
+          <td mat-cell *matCellDef="let element"> {{element.team}} </td>
+        </ng-container>
+
+        <!-- Rank Column -->
+        <ng-container matColumnDef="rank">
+          <th mat-header-cell *matHeaderCellDef> Rank</th>
+          <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+        </ng-container>
+
+        <!-- Battle Result Column -->
+        <ng-container matColumnDef="battleResults">
+          <th mat-header-cell *matHeaderCellDef> Individual Battle Results</th>
+          <td mat-cell *matCellDef="let element">
+            <strong style="color: green" *ngIf="element.battleResults === IIndividualBattleResults.Winner">
+              🏆 {{element.battleResults | uppercase }}
+            </strong>
+            <strong style="color: red" *ngIf="element.battleResults ===  IIndividualBattleResults.Loser">
+              👎 {{element.battleResults | uppercase }}
+            </strong>
+            <strong *ngIf="element.battleResults === IIndividualBattleResults.Tie">
+              🏴 {{element.battleResults | uppercase }}
+            </strong>
+            <strong *ngIf="element.battleResults === IIndividualBattleResults.Survivor">
+              🏅 {{element.battleResults | uppercase }}
+            </strong>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+<div fxLayoutAlign="center center" mat-dialog-actions class="p-4">
+  <button mat-button [mat-dialog-close]="" cdkFocusInitial class="btn btn-primary w-25">Close</button>
+</div>

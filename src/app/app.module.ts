@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { TransformerStatsComponent } from './transformers/components/transformer-stats/transformer-stats.component';
 import { TransformerTeamsComponent } from './transformers/components/transformer-teams/transformer-teams.component';
 import { TransformerOpponentComponent } from './transformers/components/transformer-opponent/transformer-opponent.component';
+import { BattleResultComponent } from './transformers/components/battle-result/battle-result.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TransformerOpponentComponent } from './transformers/components/transfor
     TransformersComponent,
     TransformerStatsComponent,
     TransformerTeamsComponent,
-    TransformerOpponentComponent
+    TransformerOpponentComponent,
+    BattleResultComponent
   ],
   imports: [
     BrowserModule,
