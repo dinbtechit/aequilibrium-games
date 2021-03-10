@@ -11,39 +11,55 @@ export class CastleService {
   public indexesOfCastle: any[] = [];
   public peekNValleys: any[] = [];
 
+  public countCastles(landscape: number[]): number {
+    this.indexesOfCastle = [];
+    const convertStringToNumber = landscape;
+    /*console.log(landscape);*/
+    const array = this.getPeaksAndValleysIndexes(convertStringToNumber);
+    this.indexesOfCastle = array;
+    /*console.log(array);*/
+    return array.filter(x => x === 'v' || x === 'p' || x === '*').length;
+  }
+
   getPeaksAndValleysIndexes(landscape: any): string[] {
-    // tslint:disable-next-line:one-variable-per-declaration prefer-const
-    let index = 0, prev, current, next, max = landscape.length - 1, peaksAndValleys = [];
-    while (index <= max) {
+    let previousLand;
+    let currentLand;
+    let nextLand;
+    const emptyLand = -20000;
+    const fullLandSize = landscape.length - 1;
+    const peaksAndValleys = [];
+    let index = 0;
+    while (index <= fullLandSize) {
       const prevIndex = index - 1;
       if (prevIndex < 0) {
-        peaksAndValleys[index] = '*';
+        if (landscape[index] !== emptyLand) {
+          peaksAndValleys[index] = '*';
+        }
         index++;
         continue;
       }
-      prev = landscape[prevIndex];
-      // increment index proceed until there is a change to account for multiples
-      while ((index < max) && (landscape[index] === landscape[index + 1])) {
+      previousLand = landscape[prevIndex];
+      while ((index < fullLandSize) && (landscape[index] === landscape[index + 1])) {
         index++;
       }
-      if (index >= max) {
-        peaksAndValleys[index] = '*';
+      if (index >= fullLandSize) {
+        if (landscape[index] !== emptyLand) {
+          peaksAndValleys[index] = '*';
+        }
         break;
       }
 
-      current = landscape[index];
-      next = landscape[index + 1];
-      if (prev !== landscape[prevIndex]) {
-        prev = landscape[prevIndex];
+      currentLand = landscape[index];
+      nextLand = landscape[index + 1];
+      if (previousLand !== landscape[prevIndex]) {
+        previousLand = landscape[prevIndex];
       }
-      if ((current < prev) && (current < next)) {
-        // valley
+      if ((currentLand < previousLand) && (currentLand < nextLand)) {
         peaksAndValleys[index] = 'v';
         index++;
         continue;
       }
-      if ((current > prev) && (current > next)) {
-        // peak
+      if ((currentLand > previousLand) && (currentLand > nextLand)) {
         peaksAndValleys[index] = 'p';
         index++;
         continue;
@@ -53,19 +69,8 @@ export class CastleService {
     return peaksAndValleys;
   }
 
-  public countCastles(landscape: number[]): number {
-
-    this.indexesOfCastle = [];
-
-    const convertStringToNumber = landscape;
-    /*console.log(landscape);*/
-    const array = this.getPeaksAndValleysIndexes(convertStringToNumber);
-    this.indexesOfCastle = array;
-    /*console.log(array);*/
-    return array.filter(x => x === 'v' || x === 'p' || x === '*').length;
-
+  private getPeekAndValleysCount(landscape: number[]): number {
     const sameLandscape = landscape.every(land => land === landscape[0]);
-
     if (sameLandscape) {
       if (landscape[0] == null) {
         return 0;
