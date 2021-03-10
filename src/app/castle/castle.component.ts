@@ -89,7 +89,6 @@ export class CastleComponent implements OnInit {
         this.grid = [];
       } else {
         this.grid = this.numberInput.split(',');
-        console.log(this.grid);
       }
       this.countCastles();
     }, 140);

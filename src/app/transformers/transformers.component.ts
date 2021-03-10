@@ -66,8 +66,6 @@ export class TransformersComponent implements OnInit, OnDestroy {
     this.prepareBattleQ({numberOfPossibleBattle: numberOfPossibleBattles, transformersTeam: this.autobots, battleQ: autobotsBattleQ});
     this.prepareBattleQ({numberOfPossibleBattle: numberOfPossibleBattles, transformersTeam: this.decepticons, battleQ: decepticonsBattleQ});
 
-    console.log(autobotsBattleQ);
-    console.log(decepticonsBattleQ);
 
     if (autobotsBattleQ.length === decepticonsBattleQ.length) {
 
@@ -75,14 +73,11 @@ export class TransformersComponent implements OnInit, OnDestroy {
         const autobot: ITransformer = autobotsBattleQ.shift();
         const decepticon: ITransformer = decepticonsBattleQ.shift();
         this.battleService.setOpponents({autobot, decepticon});
-        console.log(autobot);
-        console.log(decepticon);
         await this.delay(1000);
         const battleResult: IBattleResults = this.battleService.battle(
           {key: autobot.name, value: autobot},
           {key: decepticon.name, value: decepticon});
 
-        console.log(battleResult);
         if (battleResult === IBattleResults.AllDestroyed) {
           this.prepareBattleStats({
             isAllDestroyed: true,
@@ -109,11 +104,8 @@ export class TransformersComponent implements OnInit, OnDestroy {
           autobots: this.autobots,
           decepticons: this.decepticons
         });
-
-        this.displayBattleStatsDialog(this.battleStats);
-
-        console.log(this.battleStats);
       }
+      this.displayBattleStatsDialog(this.battleStats);
 
     } else {
       console.error('Oops..BattleQ size is not equal.');
@@ -140,8 +132,6 @@ export class TransformersComponent implements OnInit, OnDestroy {
     let cnt = 1;
     for (const [k, v] of transformersTeam) {
       if (cnt <= numberOfPossibleBattle) {
-        console.log(cnt);
-        console.log(numberOfPossibleBattle);
         battleQ.push(v);
         cnt += 1;
       } else {

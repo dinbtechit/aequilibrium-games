@@ -1,14 +1,36 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <h1 mat-dialog-title class="fw-bolder text-white" style="font-size: 3rem;">Battle Ended</h1>
 </div>
-<div mat-dialog-content class="mt-5 text-white">
+<div mat-dialog-content class="mt-5 text-white" *ngIf="data.battleResults === 'tie' || data.battleResults === 'allDestroyed'">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <ng-container *ngIf="data.battleResults === 'tie'">
+      <h1 mat-dialog-title class="fw-bolder me-3" style="font-size: 3em;opacity: 1">
+        🏳 Match Tie
+      </h1>
+      <p style="font-size: large">
+        <i class="fa fa-info-circle"></i> In the event of a tie, both Transformers are considered destroyed
+      </p>
+    </ng-container>
+    <ng-container *ngIf="data.battleResults === 'allDestroyed'">
+      <h1 mat-dialog-title class="fw-bolder me-3" style="font-size: 3em;opacity: 1">
+        💥 Duplicate Competitors
+      </h1>
+      <p style="font-size: large">
+        <i class="fa fa-info-circle"></i> In the event, either of the above face each other, or a duplicate of each other, the game
+        immediately ends with all competitors destroyed
+      </p>
+    </ng-container>
+    <img src="assets/images/animation.gif" alt="animations" style=" mix-blend-mode: darken;">
+  </div>
+</div>
+<div mat-dialog-content class="mt-5 text-white" *ngIf="data.battleResults !== 'tie' && data.battleResults !== 'allDestroyed'">
   <div fxLayout="column" fxLayoutGap="40px">
     <div fxFlex fxLayout="column" fxLayoutAlign="start start">
       <mat-card class="w-100">
         <mat-card-content fxLayout="row">
           <div fxFlex fxLayoutAlign="start start">
           <h1 mat-dialog-title class="fw-bolder ms-2">
-            Number Of Battles
+            Number Of Battles. . .  .  .  .  .
           </h1>
           </div>
           <div fxFlex fxLayoutAlign="end end">
@@ -58,7 +80,7 @@
 
         <!-- Battle Result Column -->
         <ng-container matColumnDef="battleResults">
-          <th mat-header-cell *matHeaderCellDef> Individual Battle Results</th>
+          <th mat-header-cell *matHeaderCellDef> Individual Battle Result</th>
           <td mat-cell *matCellDef="let element">
             <strong style="color: green" *ngIf="element.battleResults === IIndividualBattleResults.Winner">
               🏆 {{element.battleResults | uppercase }}
@@ -116,7 +138,7 @@
 
         <!-- Battle Result Column -->
         <ng-container matColumnDef="battleResults">
-          <th mat-header-cell *matHeaderCellDef> Individual Battle Results</th>
+          <th mat-header-cell *matHeaderCellDef> Individual Battle Result</th>
           <td mat-cell *matCellDef="let element">
             <strong style="color: green" *ngIf="element.battleResults === IIndividualBattleResults.Winner">
               🏆 {{element.battleResults | uppercase }}

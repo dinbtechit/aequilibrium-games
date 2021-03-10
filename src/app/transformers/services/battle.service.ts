@@ -37,6 +37,12 @@ export class BattleService {
     } else if (decepticon.key === 'Optimus Prime' && autobot.key !== 'Predaking') {
       console.log('sp - D');
       return IBattleResults.Decepticons;
+    }else if (autobot.key !== 'Optimus Prime' && decepticon.key === 'Predaking') {
+      console.log('sp - A');
+      return IBattleResults.Decepticons;
+    } else if (decepticon.key !== 'Optimus Prime' && autobot.key === 'Predaking') {
+      console.log('sp - D');
+      return IBattleResults.Autobots;
     } else if (autobot.key === 'Optimus Prime' && decepticon.key === 'Predaking') {
       return IBattleResults.Tie;
     } else if (decepticon.key === 'Optimus Prime' && autobot.key === 'Predaking') {

@@ -5,5 +5,25 @@
 }
 
 table {
+  .mat-column-image {
+    width: 10%;
+  }
 
+  .mat-column-name {
+    width: 20%;
+  }
+
+  .mat-column-team {
+    width: 20%;
+  }
+
+  .mat-column-rank {
+    width: 20%;
+    padding-left: 20px;
+  }
+
+  .mat-column-battleResults {
+    width: 20%;
+    text-align: center;
+  }
 }
