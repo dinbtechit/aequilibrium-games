@@ -89,7 +89,7 @@ export class TransformersComponent implements OnInit, OnDestroy {
         const decepticon: ITransformer = decepticonsBattleQ.shift();
         this.battleService.setOpponents({autobot, decepticon});
         this.visible = true;
-        await this.delay(5000);
+        await this.delay(1000);
         const battleResult: IBattleResults = this.battleService.battle(
           {key: autobot.name, value: autobot},
           {key: decepticon.name, value: decepticon});
