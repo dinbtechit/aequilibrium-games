@@ -30,8 +30,8 @@ sequence `[2,6,6,6,3]` the sequence of three 6s is a peak.
 
 Checkout the working app here -> https://aequilibrium-games.web.app/castle
 
-Draw the peek and valleys please be aware the 1D array is displayed as grid. The "number of castles" that can be build 
-is displayed on the  is displayed on the left-hand side corner of the screen.
+Draw the peek and valleys please be aware the 1D array is displayed as (nxn) grid. The "number of castles" that can be built 
+is displayed on the left-hand side corner of the screen.
 
 ![](readme/castle-design-mode.gif)
 
